@@ -2,19 +2,19 @@ import java.util.*;
 
 class EncodeDecode {
     public static String encode(List<String> strs) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder str = new StringBuilder();
 
         for (String s : strs) {
-            sb.append(s.length()).append("#").append(s);
+            str.append(s.length()).append("#").append(s);
         }
 
-        return sb.toString();
+        return str.toString();
     }
 
     public static List<String> decode(String str) {
         List<String> result = new ArrayList<>();
-        int i = 0;
 
+        int i = 0;
         while (i < str.length()) {
             int j = i;
 
@@ -22,8 +22,7 @@ class EncodeDecode {
                 j++;
             }
 
-            int len = Integer.parseInt(str.substring(i, j));
-
+            int len = Integer.parseInt(str.substring(i,j));
             String word = str.substring(j + 1, j + 1 + len);
             result.add(word);
 
@@ -34,7 +33,9 @@ class EncodeDecode {
     }
 
     public static void main(String[] args) {
-        List<String> input = Arrays.asList("Hello", "World");
+        List<String> input = new ArrayList<>();
+        input.add("Hello");
+        input.add("World");
 
         String encoded = encode(input);
         System.out.println("Encoded : " + encoded);
