@@ -1,9 +1,9 @@
 class TrappingRainWater {
     public static int trap(int[] height) {
         int left = 0;
-        int right = height.length - 1;
-
         int leftMax = 0;
+
+        int right = height.length - 1;
         int rightMax = 0;
         int water = 0;
 
