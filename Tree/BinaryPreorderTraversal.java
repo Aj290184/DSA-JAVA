@@ -1,12 +1,12 @@
 import java.util.*;
 
-public class BinaryInorderTraversal {
+public class BinaryPreorderTraversal {
     static class TreeNode {
         int data;
         TreeNode left;
         TreeNode right;
 
-        TreeNode(int data){
+        TreeNode(int data) {
             this.data = data;
             this.left = null;
             this.right = null;
@@ -14,12 +14,12 @@ public class BinaryInorderTraversal {
     }
 
     static class BinaryTree {
-        static int idx  = -1;
+        static int idx = -1;
 
-        public static TreeNode buildTree(int nodes[]){
+        public static TreeNode buildTree(int nodes[]) {
             idx++;
 
-            if(nodes[idx] == -1){
+            if (nodes[idx] == -1) {
                 return null;
             }
 
@@ -31,30 +31,27 @@ public class BinaryInorderTraversal {
         }
     }
 
-    public static List<Integer> inorderTraversal(TreeNode root){
+    public static List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        inorder(root, list);
+        preorder(root, list);
         return list;
     }
 
-    private static void inorder(TreeNode root, List<Integer> list){
+    private static void preorder(TreeNode root, List<Integer> list) {
         if (root == null) return;
 
-        inorder(root.left, list);
         list.add(root.data);
-        inorder(root.right, list);
+        preorder(root.left, list);
+        preorder(root.right, list);
     }
 
     public static void main(String[] args) {
-        int[] nodes = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
-        
+        int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+
         TreeNode root = BinaryTree.buildTree(nodes);
 
-        List<Integer> result = inorderTraversal(root);
+        List<Integer> result = preorderTraversal(root);
 
-        System.out.println("Inorder Traversal:");
-        for (int val : result) {
-            System.out.print(val + " ");
-        }
+        System.out.println("Preorder traversal : " + result);
     }
 }

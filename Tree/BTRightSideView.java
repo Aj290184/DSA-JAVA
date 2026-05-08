@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class BinaryInorderTraversal {
+public class BTRightSideView {
     static class TreeNode {
         int data;
         TreeNode left;
@@ -31,18 +31,30 @@ public class BinaryInorderTraversal {
         }
     }
 
-    public static List<Integer> inorderTraversal(TreeNode root){
-        List<Integer> list = new ArrayList<>();
-        inorder(root, list);
-        return list;
-    }
+    public static List<Integer> rightSideView(TreeNode root){
 
-    private static void inorder(TreeNode root, List<Integer> list){
-        if (root == null) return;
+        List<Integer> result = new ArrayList<>();
+        if(root == null) return result;
 
-        inorder(root.left, list);
-        list.add(root.data);
-        inorder(root.right, list);
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for(int i = 0; i < size; i++){
+                TreeNode node = queue.poll();
+
+                if(i == size - 1){
+                    result.add(node.data);
+                }
+
+                if(node.left != null) queue.offer(node.left);
+                if(node.right != null) queue.offer(node.right);
+            }
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
@@ -50,11 +62,7 @@ public class BinaryInorderTraversal {
         
         TreeNode root = BinaryTree.buildTree(nodes);
 
-        List<Integer> result = inorderTraversal(root);
-
-        System.out.println("Inorder Traversal:");
-        for (int val : result) {
-            System.out.print(val + " ");
-        }
+        List<Integer> view = rightSideView(root);
+        System.out.println(view);
     }
 }
